@@ -4,10 +4,10 @@ import { SquareChartGantt } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { Cliente } from "../../models/Cliente";
 import { ClienteService } from "../../services/clienteService";
+import { Link } from "react-router-dom";
 export const TableClients = () => {
   const [loading, setLoading] = useState(true);
   const [clientes, setClientes] = useState<Cliente[]>([]);
-
   useEffect(() => {
     const fetchClientes = async () => {
       try {
@@ -21,7 +21,22 @@ export const TableClients = () => {
     };
     fetchClientes();
   }, []);
-
+  //metodo para borrar un cliente
+  const eliminarCliente = async (id: number) => {
+    try {
+      //llamo a mi servicio de eliminar cliente
+      await ClienteService.deleteCliente(id);
+      //actualizo el estado local de la lista de clientes para que me carguen
+      //solo los que sean diferente del id que elimine
+      alert("Cliente eliminado correctamente");
+      setClientes((prevClientes) =>
+        prevClientes.filter((cliente) => cliente.id != id)
+      );
+    } catch (error) {
+      alert("Error al eliminar el cliente");
+      console.log("error: ", error);
+    }
+  };
   if (loading) return <p className="m-10">Cargando clientes...</p>;
   return (
     <div className="m-14">
@@ -78,24 +93,37 @@ export const TableClients = () => {
                 </td>
                 <td className="px-6 py-4 flex flex-row">
                   <div className="flex justify-center align-middle">
-                    <a
-                      href="#"
+                    <Link
+                      to={`/clientes/editar/${cliente.id}`}
                       className="font-medium text-blue-600 hover:underline m-3"
                     >
                       <UserRoundPen />
-                    </a>
-                    <a
-                      href="#"
-                      className="font-medium text-red-600 hover:underline m-3"
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        cliente.id &&
+                        window.confirm("¿Deseas eliminar este cliente?") &&
+                        eliminarCliente(cliente.id)
+                      }
+                      className="font-medium text-red-600 hover:underline m-3 cursor-pointer"
                     >
                       <UserRoundX />
-                    </a>
+                    </button>
                   </div>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+      <div className="mt-5">
+        <Link
+          to={`/clientes/registrar`}
+          className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300  font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+        >
+          Registrar Nuevo Cliente
+        </Link>
       </div>
     </div>
   );
