@@ -1,12 +1,12 @@
+import { TableClients } from "../components/clients/TableClients";
 import { Footer } from "../components/Footer";
-import { HeroSection } from "../components/home/HeroSection";
 import { Navbar } from "../components/Navbar";
 
-export const Home = () => {
+export const Clientes = () => {
   return (
     <>
       <Navbar />
-      <HeroSection />
+      <TableClients />
       <Footer />
     </>
   );
