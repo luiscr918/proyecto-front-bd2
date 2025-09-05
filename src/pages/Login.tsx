@@ -15,7 +15,7 @@ export const Login = () => {
 
     try {
       const usuario = await UsuarioService.login(correo, contrasenia);
-        localStorage.setItem("usuario", JSON.stringify(usuario));
+      localStorage.setItem("usuario", JSON.stringify(usuario));
       // Mostrar mensaje de éxito
       Swal.fire({
         icon: "success",
@@ -34,7 +34,7 @@ export const Login = () => {
           navigate("/admin"); // página del admin
           break;
         case 3:
-          navigate("/superadmin"); // página del superadmin
+          navigate("/usuarios"); // página del superadmin
           break;
         default:
           navigate("/");
