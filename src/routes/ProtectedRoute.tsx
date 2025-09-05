@@ -1,9 +1,10 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/useAuth";
-import type { JSX } from "react";
+import type { ReactElement } from "react";
+
 
 interface ProtectedRouteProps {
-  children: JSX.Element;
+  children: ReactElement;
   roles?: number[]; // opcional: lista de roles permitidos
 }
 

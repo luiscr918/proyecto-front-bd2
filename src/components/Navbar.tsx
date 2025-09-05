@@ -53,6 +53,15 @@ export const Navbar = () => {
                 Home
               </Link>
             </li>
+            {/* videojuegos */}
+            <li>
+              <Link
+                to={"/videojuegos"}
+                className="block py-2 px-3 text-white rounded-sm hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0"
+              >
+                Videojuegos
+              </Link>
+            </li>
             {/*Mostrar Usuarios solo si es superAdministrador */}
             {usuario?.rolId === 3 && (
               <li>
