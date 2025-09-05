@@ -2,42 +2,42 @@ import { UserRoundPen } from "lucide-react";
 import { UserRoundX } from "lucide-react";
 import { SquareChartGantt } from "lucide-react";
 import { useEffect, useState } from "react";
-import type { Cliente } from "../../models/Usuario";
-import { ClienteService } from "../../services/clienteService";
+import type { Usuario } from "../../models/Usuario";
+import { UsuarioService } from "../../services/usuarioService";
 import { Link } from "react-router-dom";
 export const TableClients = () => {
   const [loading, setLoading] = useState(true);
-  const [clientes, setClientes] = useState<Cliente[]>([]);
+  const [Usuarios, setUsuarios] = useState<Usuario[]>([]);
   useEffect(() => {
-    const fetchClientes = async () => {
+    const fetchUsuarios = async () => {
       try {
-        const data = await ClienteService.getClientes();
-        setClientes(data);
+        const data = await UsuarioService.getUsuarios();
+        setUsuarios(data);
       } catch (error) {
-        console.error("Error al cargar clientes:", error);
+        console.error("Error al cargar Usuarios:", error);
       } finally {
         setLoading(false);
       }
     };
-    fetchClientes();
+    fetchUsuarios();
   }, []);
-  //metodo para borrar un cliente
-  const eliminarCliente = async (id: number) => {
+  //metodo para borrar un Usuario
+  const eliminarUsuario = async (id: string) => {
     try {
-      //llamo a mi servicio de eliminar cliente
-      await ClienteService.deleteCliente(id);
-      //actualizo el estado local de la lista de clientes para que me carguen
+      //llamo a mi servicio de eliminar Usuario
+      await UsuarioService.deleteUsuario(id);
+      //actualizo el estado local de la lista de Usuarios para que me carguen
       //solo los que sean diferente del id que elimine
-      alert("Cliente eliminado correctamente");
-      setClientes((prevClientes) =>
-        prevClientes.filter((cliente) => cliente.id != id)
+      alert("Usuario eliminado correctamente");
+      setUsuarios((prevUsuarios) =>
+        prevUsuarios.filter((Usuario) => Usuario.id != id)
       );
     } catch (error) {
-      alert("Error al eliminar el cliente");
+      alert("Error al eliminar el Usuario");
       console.log("error: ", error);
     }
   };
-  if (loading) return <p className="m-10">Cargando clientes...</p>;
+  if (loading) return <p className="m-10">Cargando Usuarios...</p>;
   return (
     <div className="m-14">
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -65,22 +65,22 @@ export const TableClients = () => {
             </tr>
           </thead>
           <tbody>
-            {clientes.map((cliente) => (
+            {Usuarios.map((Usuario) => (
               <tr
-                key={cliente.id}
+                key={Usuario.id}
                 className="odd:bg-white even:bg-gray-50 border-b border-gray-200"
               >
                 <th
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                 >
-                  {cliente.cedula}
+                  {Usuario.cedula}
                 </th>
                 <td className="px-6 py-4">
-                  {cliente.nombre.concat(" ", cliente.apellido)}
+                  {Usuario.nombre.concat(" ", Usuario.apellido)}
                 </td>
-                <td className="px-6 py-4">{cliente.telefono}</td>
-                <td className="px-6 py-4">{cliente.correo}</td>
+                <td className="px-6 py-4">{Usuario.telefono}</td>
+                <td className="px-6 py-4">{Usuario.correo}</td>
                 <td className="px-6 py-4">
                   <div className="flex justify-center align-middle">
                     <a
@@ -94,7 +94,7 @@ export const TableClients = () => {
                 <td className="px-6 py-4 flex flex-row">
                   <div className="flex justify-center align-middle">
                     <Link
-                      to={`/clientes/editar/${cliente.id}`}
+                      to={`/usuarios/editar/${Usuario.id}`}
                       className="font-medium text-blue-600 hover:underline m-3"
                     >
                       <UserRoundPen />
@@ -102,9 +102,9 @@ export const TableClients = () => {
                     <button
                       type="button"
                       onClick={() =>
-                        cliente.id &&
-                        window.confirm("¿Deseas eliminar este cliente?") &&
-                        eliminarCliente(cliente.id)
+                        Usuario.id &&
+                        window.confirm("¿Deseas eliminar este Usuario?") &&
+                        eliminarUsuario(Usuario.id)
                       }
                       className="font-medium text-red-600 hover:underline m-3 cursor-pointer"
                     >
@@ -119,10 +119,10 @@ export const TableClients = () => {
       </div>
       <div className="mt-5">
         <Link
-          to={`/clientes/registrar`}
+          to={`/usuarios/registrar`}
           className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300  font-medium rounded-lg text-sm px-5 py-2.5 text-center "
         >
-          Registrar Nuevo Cliente
+          Registrar Nuevo Usuario
         </Link>
       </div>
     </div>

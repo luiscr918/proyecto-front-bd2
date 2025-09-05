@@ -8,9 +8,9 @@ export const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/clientes" element={<Clientes />} />
-      <Route path="/clientes/registrar" element={<RegisterClient />} />
-      <Route path="/clientes/editar/:id" element={<UpdateClient />} />
+      <Route path="/usuarios" element={<Clientes />} />
+      <Route path="/usuarios/registrar" element={<RegisterClient />} />
+      <Route path="/usuarios/editar/:id" element={<UpdateClient />} />
     </Routes>
   );
 };

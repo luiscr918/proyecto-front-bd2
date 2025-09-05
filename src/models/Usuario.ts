@@ -1,5 +1,3 @@
-
-
 export interface Usuario {
   id?: string; // Corresponde al _id de MongoDB, que es un String
   cedula: string;
@@ -8,5 +6,5 @@ export interface Usuario {
   telefono: string;
   correo: string;
   contrasenia: string;
-  rolId: string; // Es el ID del rol, no el objeto completo
+  rolId: number; // Es el ID del rol, no el objeto completo
 }
