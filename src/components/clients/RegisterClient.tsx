@@ -124,9 +124,9 @@ export const RegisterClient = () => {
       className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
       required
     >
-      <option value={0}>Cliente</option>
-      <option value={1}>Admin</option>
-      <option value={2}>Superadmin</option>
+      <option value={1}>Cliente</option>
+      <option value={2}>Admin</option>
+      <option value={3}>Superadmin</option>
     </select>
   </div>
           <button
