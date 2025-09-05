@@ -1,11 +1,7 @@
-import type { Cliente } from "./Cliente";
-import type { DetallePrestamo } from "./DetallePrestamo";
-
 export interface Prestamo {
-  id?: number; // Long en Java → number en TS
-  fechaPrestamo: string; // Date en Java → string en ISO desde la API
+  id?: string; // Correcto: _id de MongoDB es un String
+  fechaPrestamo: string;
   fechaDevolucion: string;
   estado: string;
-  cliente?: Cliente; // ManyToOne relación opcional
-  detalles?: DetallePrestamo[]; // OneToMany relación opcional
+  usuarioId: string; // Es el ID del usuario, no el objeto completo
 }

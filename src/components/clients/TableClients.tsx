@@ -2,7 +2,7 @@ import { UserRoundPen } from "lucide-react";
 import { UserRoundX } from "lucide-react";
 import { SquareChartGantt } from "lucide-react";
 import { useEffect, useState } from "react";
-import type { Cliente } from "../../models/Cliente";
+import type { Cliente } from "../../models/Usuario";
 import { ClienteService } from "../../services/clienteService";
 import { Link } from "react-router-dom";
 export const TableClients = () => {

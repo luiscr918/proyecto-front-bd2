@@ -1,5 +1,5 @@
 import { api } from "../api/api";
-import type { Cliente } from "../models/Cliente";
+import type { Cliente } from "../models/Usuario";
 export const ClienteService = {
   //Obtener todos los clientes
   getClientes: async (): Promise<Cliente[]> => {

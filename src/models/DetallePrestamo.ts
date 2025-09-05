@@ -1,10 +1,7 @@
-import type { Prestamo } from "./Prestamo";
-import type { Videojuego } from "./Videojuego";
-
 export interface DetallePrestamo {
-  id?: number;           // Long en Java → number en TS
+  id?: string; // Correcto: _id de MongoDB es un String
   cantidad: number;
-  total: number;
-  prestamo?: Prestamo;  // Relación ManyToOne con Prestamo
-  videojuegos?: Videojuego[]; // Relación OneToMany con Videojuego
+  subtotal: number; // El subtotal corresponde al precio por unidad
+  prestamoId: string; // Referencia al ID del préstamo
+  videojuegoId: string; // Referencia al ID del videojuego
 }

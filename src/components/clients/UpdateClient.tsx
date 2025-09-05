@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Footer } from "../Footer";
 import { Navbar } from "../Navbar";
 import { useEffect, useState } from "react";
-import type { Cliente } from "../../models/Cliente";
+import type { Cliente } from "../../models/Usuario";
 import { ClienteService } from "../../services/clienteService";
 
 export const UpdateClient = () => {

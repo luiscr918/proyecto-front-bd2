@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Footer } from "../Footer";
 import { Navbar } from "../Navbar";
-import type { Cliente } from "../../models/Cliente";
+import type { Cliente } from "../../models/Usuario";
 import { ClienteService } from "../../services/clienteService";
 import { useNavigate } from "react-router-dom";
 
