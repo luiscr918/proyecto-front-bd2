@@ -38,6 +38,26 @@ export const TableClients = () => {
     }
   };
   if (loading) return <p className="m-10">Cargando Usuarios...</p>;
+  //poner nombre al rol por el id
+  const nombrarRol = (id: number) => {
+    let nombre = "";
+    switch (id) {
+      case 1:
+        nombre = "Cliente";
+        break;
+      case 2:
+        nombre = "Admin";
+        break;
+      case 3:
+        nombre = "SuperAdmin";
+        break;
+
+      default:
+        nombre = "Rol desconocido";
+        break;
+    }
+    return nombre;
+  };
   return (
     <div className="m-14">
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -55,6 +75,9 @@ export const TableClients = () => {
               </th>
               <th scope="col" className="px-6 py-3">
                 Correo
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Rol
               </th>
               <th scope="col" className="px-6 py-3 text-center">
                 Prestamos
@@ -81,16 +104,24 @@ export const TableClients = () => {
                 </td>
                 <td className="px-6 py-4">{Usuario.telefono}</td>
                 <td className="px-6 py-4">{Usuario.correo}</td>
-                <td className="px-6 py-4">
-                  <div className="flex justify-center align-middle">
-                    <a
-                      href="#"
-                      className="font-medium text-cyan-400 hover:underline m-3"
-                    >
-                      <SquareChartGantt />
-                    </a>
-                  </div>
-                </td>
+                <td className="px-6 py-4">{nombrarRol(Usuario.rolId)}</td>
+                {Usuario.rolId !== 1 ? (
+                  <td className="px-6 py-4">
+                    <p className="text-center">No aplica</p>
+                  </td>
+                ) : (
+                  <td className="px-6 py-4">
+                    <div className="flex justify-center align-middle">
+                      <a
+                        href="#"
+                        className="font-medium text-cyan-400 hover:underline m-3"
+                      >
+                        <SquareChartGantt />
+                      </a>
+                    </div>
+                  </td>
+                )}
+
                 <td className="px-6 py-4 flex flex-row">
                   <div className="flex justify-center align-middle">
                     <Link

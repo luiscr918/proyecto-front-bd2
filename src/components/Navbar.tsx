@@ -78,7 +78,7 @@ export const Navbar = () => {
             {usuario?.rolId === 1 && (
               <li>
                 <Link
-                  to={"/prestamos"}
+                  to={"/prestamos/mis-prestamos"}
                   className="block py-2 px-3 text-white rounded-sm hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0"
                 >
                   Mis Préstamos

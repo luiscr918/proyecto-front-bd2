@@ -1,12 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import { Footer } from "../components/Footer";
-import { Navbar } from "../components/Navbar";
 import { useState } from "react";
+import { useAuth } from "../context/useAuth";
 import { UsuarioService } from "../services/usuarioService";
 import Swal from "sweetalert2";
+import { Navbar } from "../components/Navbar";
+import { Footer } from "../components/Footer";
 
 export const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuth(); // <-- Aquí
   const [correo, setCorreo] = useState("");
   const [contrasenia, setContrasenia] = useState("");
 
@@ -15,8 +17,16 @@ export const Login = () => {
 
     try {
       const usuario = await UsuarioService.login(correo, contrasenia);
+
+      // Guardar en contexto
+      login({
+        ...usuario,
+        id: usuario.id ?? ""
+      });
+
+      // Guardar también en localStorage (opcional)
       localStorage.setItem("usuario", JSON.stringify(usuario));
-      // Mostrar mensaje de éxito
+
       Swal.fire({
         icon: "success",
         title: "¡Bienvenido!",
@@ -41,8 +51,6 @@ export const Login = () => {
       }
     } catch (err) {
       console.error(err);
-
-      // Mostrar mensaje de error con SweetAlert2
       Swal.fire({
         icon: "error",
         title: "Error",

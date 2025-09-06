@@ -5,4 +5,5 @@ export interface Videojuego {
   stock: number;
   plataforma: string;
   precio: number;
+  urlImagen: string;
 }
