@@ -16,16 +16,19 @@ export const RegisterClient = () => {
     contrasenia: "",
     rolId: 0,
   });
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     setUsuario({ ...Usuario, [e.target.name]: e.target.value });
   };
+
   const guardarUsuario = async (e: React.FormEvent) => {
     e.preventDefault();
+
     try {
       await UsuarioService.createUsuario(Usuario);
-      alert("Usuario Registrado Existosamente");
+      alert("Usuario Registrado Exitosamente");
       setUsuario({
         cedula: "",
         nombre: "",
@@ -41,6 +44,7 @@ export const RegisterClient = () => {
       console.log("Error:", error);
     }
   };
+
   return (
     <>
       <Navbar />
@@ -56,10 +60,13 @@ export const RegisterClient = () => {
               name="cedula"
               value={Usuario.cedula}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
               required
+              minLength={10}
+              maxLength={10}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
             />
           </div>
+
           <div>
             <label className="block text-gray-700 mb-1">Nombre</label>
             <input
@@ -67,10 +74,13 @@ export const RegisterClient = () => {
               name="nombre"
               value={Usuario.nombre}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
               required
+              minLength={2}
+              maxLength={50}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
             />
           </div>
+
           <div>
             <label className="block text-gray-700 mb-1">Apellido</label>
             <input
@@ -78,21 +88,27 @@ export const RegisterClient = () => {
               name="apellido"
               value={Usuario.apellido}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
               required
+              minLength={2}
+              maxLength={50}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
             />
           </div>
+
           <div>
             <label className="block text-gray-700 mb-1">Teléfono</label>
             <input
-              type="text"
+              type="tel"
               name="telefono"
               value={Usuario.telefono}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
               required
+              pattern="^\+?[0-9]{7,15}$"
+              title="Debe tener 10 dígitos"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
             />
           </div>
+
           <div>
             <label className="block text-gray-700 mb-1">Correo</label>
             <input
@@ -100,35 +116,40 @@ export const RegisterClient = () => {
               name="correo"
               value={Usuario.correo}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
               required
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
             />
           </div>
-           <div>
-    <label className="block text-gray-700 mb-1">Contraseña</label>
-    <input
-      type="password"
-      name="contrasenia"
-      value={Usuario.contrasenia}
-      onChange={handleChange}
-      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
-      required
-    />
-  </div>
-    <div>
-    <label className="block text-gray-700 mb-1">Rol</label>
-    <select
-      name="rolId"
-      value={Usuario.rolId}
-      onChange={handleChange}
-      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
-      required
-    >
-      <option value={1}>Cliente</option>
-      <option value={2}>Admin</option>
-      <option value={3}>Superadmin</option>
-    </select>
-  </div>
+
+          <div>
+            <label className="block text-gray-700 mb-1">Contraseña</label>
+            <input
+              type="text"
+              name="contrasenia"
+              value={Usuario.contrasenia}
+              onChange={handleChange}
+              required
+              minLength={8}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-700 mb-1">Rol</label>
+            <select
+              name="rolId"
+              value={Usuario.rolId}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            >
+              <option value={0}>Seleccione un rol</option>
+              <option value={1}>Cliente</option>
+              <option value={2}>Admin</option>
+              <option value={3}>Superadmin</option>
+            </select>
+          </div>
+
           <button
             type="submit"
             className="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded-lg"
