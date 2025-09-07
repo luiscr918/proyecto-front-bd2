@@ -48,4 +48,10 @@ export const PrestamoService = {
     const { data } = await api.get<Prestamo[]>(`/prestamo/estado/${estado}`);
     return data;
   },
+
+  // Cambiar estado de un préstamo (admin)
+cambiarEstado: async (id: string, nuevoEstado: string): Promise<void> => {
+  await api.patch(`/prestamo/${id}/estado`, { estado: nuevoEstado });
+},
+
 };

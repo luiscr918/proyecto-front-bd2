@@ -41,10 +41,10 @@ export const Login = () => {
           navigate("/"); // página del cliente
           break;
         case 2:
-          navigate("/admin"); // página del admin
+          navigate("/dashboard/admin"); 
           break;
         case 3:
-          navigate("/usuarios"); // página del superadmin
+          navigate("/dashboard/superadmin"); 
           break;
         default:
           navigate("/");
