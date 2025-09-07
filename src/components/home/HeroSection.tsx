@@ -12,7 +12,7 @@ export const HeroSection = () => {
     <>
       <section className="bg-gradient-to-b from-white via-blue-50 to-blue-100 text-gray-900">
 
-        {/* Hero Principal */}
+
         <div className="relative w-full h-screen">
           <img
             src="https://4kwallpapers.com/images/walls/thumbs_3t/16725.jpg"
@@ -34,7 +34,7 @@ export const HeroSection = () => {
           </div>
         </div>
 
-        {/* Beneficios */}
+
         <div className="py-20 max-w-screen-xl mx-auto px-4 grid sm:grid-cols-1 md:grid-cols-3 gap-12">
           {[
             { title: "Variedad de Juegos", desc: "Encuentra todo tipo de títulos para todos los gustos.", icon: "🎮" },
@@ -49,7 +49,6 @@ export const HeroSection = () => {
           ))}
         </div>
 
-        {/* Estadísticas */}
         <div className="py-20 flex flex-wrap justify-center gap-12">
           {[
             { num: "120+", label: "Juegos", color: "bg-blue-600" },
@@ -63,7 +62,6 @@ export const HeroSection = () => {
           ))}
         </div>
 
-        {/* Videojuegos Destacados */}
         <div className="py-24 max-w-screen-xl mx-auto px-4">
           <h2 className="text-5xl font-bold text-center mb-16">Videojuegos Destacados</h2>
           <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-12">
@@ -79,7 +77,7 @@ export const HeroSection = () => {
           </div>
         </div>
 
-        {/* CTA Final */}
+
         <div className="py-24 bg-gradient-to-r from-blue-50 via-blue-100 to-white text-center">
           <h2 className="text-5xl font-bold mb-6">¿Listo para empezar?</h2>
           <p className="text-gray-700 mb-8 text-xl">Únete a GameLoan y empieza a disfrutar de tus videojuegos favoritos hoy mismo.</p>
