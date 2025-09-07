@@ -12,6 +12,10 @@ import { UpdateGame } from "../components/games/UpdateGame";
 import { RegisterPrestamos } from "../components/prestamos/RegisterPrestamos";
 import { Prestamos } from "../pages/Prestamos";
 import { UpdatePrestamoClient } from "../components/prestamos/UpdatePrestamoClient";
+import { CambiarEstadoPrestamo } from "../components/admin/CambiarEstadoPrestamo";
+import { GestionPrestamo } from "../components/superAdmin/GestionPrestamo";
+import { DashboardAdmin } from "../components/admin/DashboardAdmin";
+import { DashboardSuperAdmin } from "../components/superAdmin/DashboardSuperAdmin";
 //roles
 /* 1-Cliente
 2-Admin
@@ -60,6 +64,7 @@ export const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
+
       <Route
         path="/videojuegos/admin"
         element={
@@ -90,6 +95,45 @@ export const AppRoutes = () => {
         element={
           <ProtectedRoute roles={[3]}>
             <UpdateClient />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* RUTA PARA CMABIAR ESTADO DE PRESTAMOS  ADMIN */}
+      <Route
+        path="/prestamos/admin"
+        element={
+          <ProtectedRoute roles={[2]}>
+            <CambiarEstadoPrestamo />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* RUTA PARA CMABIAR ESTADO DE PRESTAMOS  SUPERADMIN */}
+      <Route
+        path="/prestamos/superadmin"
+        element={
+          <ProtectedRoute roles={[3]}>
+            <GestionPrestamo />
+          </ProtectedRoute>
+        }
+      />
+
+        {/* DASHBOARD PARA ADMIN Y SUPERADMIN */}
+      <Route
+        path="/dashboard/admin"
+        element={
+          <ProtectedRoute roles={[2]}>
+            <DashboardAdmin />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/dashboard/superadmin"
+        element={
+          <ProtectedRoute roles={[3]}>
+            <DashboardSuperAdmin />
           </ProtectedRoute>
         }
       />

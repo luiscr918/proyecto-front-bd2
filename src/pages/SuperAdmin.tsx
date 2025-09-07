@@ -1,9 +1,14 @@
+import { Footer } from "../components/Footer"
+import { Navbar } from "../components/Navbar"
+import { GestionPrestamo } from "../components/superAdmin/GestionPrestamo"
 
 
-export const SuperAdmin=()=> {
+export const SuperAdmin = () => {
   return (
-    <div>
-      
-    </div>
+    <>
+      <Navbar />
+      <GestionPrestamo/>
+      <Footer />
+    </>
   )
 }
