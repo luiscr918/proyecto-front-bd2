@@ -4,6 +4,8 @@ interface Usuario {
   id: string;
   correo: string;
   rolId: number;
+  nombre:string;
+  apellido:string;
 }
 
 interface AuthContextType {

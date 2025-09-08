@@ -16,6 +16,7 @@ import { CambiarEstadoPrestamo } from "../components/admin/CambiarEstadoPrestamo
 import { GestionPrestamo } from "../components/superAdmin/GestionPrestamo";
 import { DashboardAdmin } from "../components/admin/DashboardAdmin";
 import { DashboardSuperAdmin } from "../components/superAdmin/DashboardSuperAdmin";
+import { PrestamosClientReview } from "../components/clients/PrestamosClientReview";
 //roles
 /* 1-Cliente
 2-Admin
@@ -85,7 +86,7 @@ export const AppRoutes = () => {
       <Route
         path="/usuarios"
         element={
-          <ProtectedRoute roles={[2, 3]}>
+          <ProtectedRoute roles={[3]}>
             <Clientes />
           </ProtectedRoute>
         }
@@ -95,6 +96,14 @@ export const AppRoutes = () => {
         element={
           <ProtectedRoute roles={[3]}>
             <UpdateClient />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/usuarios/prestamos/:id"
+        element={
+          <ProtectedRoute roles={[2, 3]}>
+            <PrestamosClientReview />
           </ProtectedRoute>
         }
       />
@@ -119,7 +128,7 @@ export const AppRoutes = () => {
         }
       />
 
-        {/* DASHBOARD PARA ADMIN Y SUPERADMIN */}
+      {/* DASHBOARD PARA ADMIN Y SUPERADMIN */}
       <Route
         path="/dashboard/admin"
         element={

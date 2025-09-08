@@ -21,7 +21,7 @@ export const Login = () => {
       // Guardar en contexto
       login({
         ...usuario,
-        id: usuario.id ?? ""
+        id: usuario.id ?? "",
       });
 
       // Guardar también en localStorage (opcional)
@@ -38,13 +38,13 @@ export const Login = () => {
       // Redirigir según rol
       switch (usuario.rolId) {
         case 1:
-          navigate("/"); // página del cliente
+          navigate("/prestamos/mis-prestamos"); // página del cliente
           break;
         case 2:
-          navigate("/dashboard/admin"); 
+          navigate("/dashboard/admin");
           break;
         case 3:
-          navigate("/dashboard/superadmin"); 
+          navigate("/dashboard/superadmin");
           break;
         default:
           navigate("/");

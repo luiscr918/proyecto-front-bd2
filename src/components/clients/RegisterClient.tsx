@@ -38,7 +38,7 @@ export const RegisterClient = () => {
         contrasenia: "",
         rolId: 0,
       });
-      navigate("/Usuarios");
+      navigate("/");
     } catch (error) {
       alert("Error al registrar Usuario");
       console.log("Error:", error);

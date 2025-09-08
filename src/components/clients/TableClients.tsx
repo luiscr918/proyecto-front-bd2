@@ -112,12 +112,12 @@ export const TableClients = () => {
                 ) : (
                   <td className="px-6 py-4">
                     <div className="flex justify-center align-middle">
-                      <a
-                        href="#"
+                      <Link
+                        to={`/usuarios/prestamos/${Usuario.id}`}
                         className="font-medium text-cyan-400 hover:underline m-3"
                       >
                         <SquareChartGantt />
-                      </a>
+                      </Link>
                     </div>
                   </td>
                 )}

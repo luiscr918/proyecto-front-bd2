@@ -63,21 +63,40 @@ export const Navbar = () => {
               </Link>
             </li>
 
-
             {/* Mostrar "Mis Préstamos" solo si el usuario está logueado y es rol 1 (Cliente) */}
             {usuario?.rolId === 1 && (
               <li>
                 <Link
                   to={"/prestamos/mis-prestamos"}
                   className="block py-2 px-3 text-white rounded-sm hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0"
-                  >
+                >
                   Mis Préstamos
                 </Link>
               </li>
             )}
-            
+            {/* Mostrar "Dashboard Admin" solo si el usuario está logueado y es rol 2 (Administrador) */}
+            {usuario?.rolId === 2 && (
+              <li>
+                <Link
+                  to={"/dashboard/admin"}
+                  className="block py-2 px-3 text-white rounded-sm hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0"
+                >
+                  Dashboard Admin
+                </Link>
+              </li>
+            )}
+            {/* Mostrar "Dashboard Super Admin" solo si el usuario está logueado y es rol 3 (SuperAdministrador) */}
+            {usuario?.rolId === 3 && (
+              <li>
+                <Link
+                  to={"/dashboard/superadmin"}
+                  className="block py-2 px-3 text-white rounded-sm hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0"
+                >
+                  Dashboard SuperAdmin
+                </Link>
+              </li>
+            )}
 
-            
             {/* Mostrar Iniciar Sesión y Registrarse SOLO si no hay usuario */}
             {!usuario && (
               <>
@@ -85,7 +104,7 @@ export const Navbar = () => {
                   <Link
                     to={"/login"}
                     className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-                    >
+                  >
                     Iniciar Sesión
                   </Link>
                 </li>
@@ -112,9 +131,6 @@ export const Navbar = () => {
                 </button>
               </li>
             )}
-            
-
-
           </ul>
         </div>
       </div>
