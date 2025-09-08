@@ -9,6 +9,7 @@ import { Footer } from "../Footer";
 export const AllGamesAdmin = () => {
   const [loading, setLoading] = useState(true);
   const [videojuegos, setVideojuegos] = useState<Videojuego[]>([]);
+  const [search, setSearch] = useState(""); // 🔍 Estado para búsqueda
 
   useEffect(() => {
     const fetchVideojuegos = async () => {
@@ -38,12 +39,38 @@ export const AllGamesAdmin = () => {
     }
   };
 
+  // 🔎 Filtrado de videojuegos
+  const filteredVideojuegos = videojuegos.filter(
+    (v) =>
+      v.titulo.toLowerCase().includes(search.toLowerCase()) ||
+      v.genero.toLowerCase().includes(search.toLowerCase()) ||
+      v.plataforma.toLowerCase().includes(search.toLowerCase())
+  );
+
   if (loading) return <p className="m-10">Cargando videojuegos...</p>;
 
   return (
     <>
       <Navbar />
       <div className="m-14">
+        {/* 🔍 Barra de búsqueda */}
+        <div className="mb-5 flex justify-between items-center">
+          <input
+            type="text"
+            placeholder="Buscar por título, género o plataforma..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="border rounded-lg px-4 py-2 w-1/2 shadow-sm focus:ring-2 focus:ring-cyan-400 outline-none"
+          />
+
+          <Link
+            to="/videojuegos/registrar"
+            className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          >
+            Registrar Nuevo Videojuego
+          </Link>
+        </div>
+
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left text-gray-500">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50">
@@ -57,7 +84,7 @@ export const AllGamesAdmin = () => {
               </tr>
             </thead>
             <tbody>
-              {videojuegos.map((v) => (
+              {filteredVideojuegos.map((v) => (
                 <tr
                   key={v.id}
                   className="odd:bg-white even:bg-gray-50 border-b border-gray-200"
@@ -83,17 +110,18 @@ export const AllGamesAdmin = () => {
                   </td>
                 </tr>
               ))}
+              {filteredVideojuegos.length === 0 && (
+                <tr>
+                  <td
+                    colSpan={6}
+                    className="px-6 py-4 text-center text-gray-500"
+                  >
+                    No se encontraron videojuegos.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
-        </div>
-
-        <div className="mt-5">
-          <Link
-            to="/videojuegos/registrar"
-            className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-          >
-            Registrar Nuevo Videojuego
-          </Link>
         </div>
       </div>
       <Footer />
