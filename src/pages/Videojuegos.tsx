@@ -1,13 +1,12 @@
-import { TableClients } from "../components/clients/TableClients";
 import { Footer } from "../components/Footer";
+import { AllGames } from "../components/games/AllGames";
 import { Navbar } from "../components/Navbar";
 
-
-export const Clientes = () => {
+export const Videojuegos = () => {
   return (
     <>
-      <Navbar/>
-      <TableClients />
+      <Navbar />
+      <AllGames />
       <Footer />
     </>
   );

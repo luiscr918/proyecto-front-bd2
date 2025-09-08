@@ -1,105 +1,155 @@
 import { useState } from "react";
 import { Footer } from "../Footer";
 import { Navbar } from "../Navbar";
-import type { Cliente } from "../../models/Cliente";
-import { ClienteService } from "../../services/clienteService";
+import type { Usuario } from "../../models/Usuario";
+import { UsuarioService } from "../../services/usuarioService";
 import { useNavigate } from "react-router-dom";
 
 export const RegisterClient = () => {
   const navigate = useNavigate();
-  const [cliente, setCliente] = useState<Cliente>({
+  const [Usuario, setUsuario] = useState<Usuario>({
     cedula: "",
     nombre: "",
     apellido: "",
     telefono: "",
     correo: "",
-    prestamos: [],
+    contrasenia: "",
+    rolId: 0,
   });
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCliente({ ...cliente, [e.target.name]: e.target.value });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setUsuario({ ...Usuario, [e.target.name]: e.target.value });
   };
-  const guardarCliente = async (e: React.FormEvent) => {
+
+  const guardarUsuario = async (e: React.FormEvent) => {
     e.preventDefault();
+
     try {
-      await ClienteService.createCliente(cliente);
-      alert("Cliente Registrado Existosamente");
-      setCliente({
+      await UsuarioService.createUsuario(Usuario);
+      alert("Usuario Registrado Exitosamente");
+      setUsuario({
         cedula: "",
         nombre: "",
         apellido: "",
         telefono: "",
         correo: "",
-        prestamos: [],
+        contrasenia: "",
+        rolId: 0,
       });
-      navigate("/clientes");
+      navigate("/");
     } catch (error) {
-      alert("Error al registrar cliente");
+      alert("Error al registrar Usuario");
       console.log("Error:", error);
     }
   };
+
   return (
     <>
       <Navbar />
       <div className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
         <h2 className="text-2xl font-bold mb-6 text-gray-800">
-          Registrar Cliente
+          Registrar Usuario
         </h2>
-        <form onSubmit={guardarCliente} className="space-y-4">
+        <form onSubmit={guardarUsuario} className="space-y-4">
           <div>
             <label className="block text-gray-700 mb-1">Cédula</label>
             <input
               type="text"
               name="cedula"
-              value={cliente.cedula}
+              value={Usuario.cedula}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
               required
+              minLength={10}
+              maxLength={10}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
             />
           </div>
+
           <div>
             <label className="block text-gray-700 mb-1">Nombre</label>
             <input
               type="text"
               name="nombre"
-              value={cliente.nombre}
+              value={Usuario.nombre}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
               required
+              minLength={2}
+              maxLength={50}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
             />
           </div>
+
           <div>
             <label className="block text-gray-700 mb-1">Apellido</label>
             <input
               type="text"
               name="apellido"
-              value={cliente.apellido}
+              value={Usuario.apellido}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
               required
+              minLength={2}
+              maxLength={50}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
             />
           </div>
+
           <div>
             <label className="block text-gray-700 mb-1">Teléfono</label>
             <input
-              type="text"
+              type="tel"
               name="telefono"
-              value={cliente.telefono}
+              value={Usuario.telefono}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
               required
+              pattern="^\+?[0-9]{7,15}$"
+              title="Debe tener 10 dígitos"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
             />
           </div>
+
           <div>
             <label className="block text-gray-700 mb-1">Correo</label>
             <input
               type="email"
               name="correo"
-              value={cliente.correo}
+              value={Usuario.correo}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
               required
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
             />
           </div>
+
+          <div>
+            <label className="block text-gray-700 mb-1">Contraseña</label>
+            <input
+              type="text"
+              name="contrasenia"
+              value={Usuario.contrasenia}
+              onChange={handleChange}
+              required
+              minLength={8}
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-700 mb-1">Rol</label>
+            <select
+              name="rolId"
+              value={Usuario.rolId}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            >
+              <option value={0}>Seleccione un rol</option>
+              <option value={1}>Cliente</option>
+              <option value={2}>Admin</option>
+              <option value={3}>Superadmin</option>
+            </select>
+          </div>
+
           <button
             type="submit"
             className="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-4 rounded-lg"
